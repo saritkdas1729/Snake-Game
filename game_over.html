@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,15 +16,37 @@
             align-items: center;
 
             background-color: #83b700;
-            color : #004e00;
+            color: #004e00;
         }
 
         h1 {
             font-size: 12rem;
         }
+
+        .play-btn {
+            text-decoration: none;
+            color: #004e00;
+
+            font-size: 2rem;
+            font-weight: bold;
+
+            border: 5px solid #004e00;
+            border-radius: 5px;
+
+            padding: 5px 20px;
+
+            transition: scale 500ms;
+        }
+
+        .play-btn:hover {
+            scale: 1.2
+        }
     </style>
 </head>
+
 <body>
     <h1>GAME OVER</h1>
+    <a class="play-btn" href="./snake_game.html">Play Again</a>
 </body>
+
 </html>
