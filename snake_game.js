@@ -14,13 +14,14 @@ window.addEventListener('load', () => {
     const COLOR_LIGHT_GREEN = '#83b700';
     const COLOR_DARK_GREEN = '#004e00';
 
-    const screenSize = Math.floor((getValueFromPixelString(panelS.height)
-        - getValueFromPixelString(panelS.borderTopWidth)
-        - getValueFromPixelString(panelS.borderBottomWidth)
-        - getValueFromPixelString(panelS.paddingTop)
-        - getValueFromPixelString(panelS.paddingBottom)
-        - getValueFromPixelString(canvasS.borderTopWidth)
-        - getValueFromPixelString(canvasS.borderBottomWidth)
+    const screenSize = Math.floor((
+            getValueFromPixelString(panelS.height) - 
+            getValueFromPixelString(panelS.borderTopWidth) - 
+            getValueFromPixelString(panelS.borderBottomWidth) - 
+            getValueFromPixelString(panelS.paddingTop) - 
+            getValueFromPixelString(panelS.paddingBottom) - 
+            getValueFromPixelString(canvasS.borderTopWidth) - 
+            getValueFromPixelString(canvasS.borderBottomWidth)
         - 2 * GAP) / REZ) * REZ;
 
     const screenWidth = screenSize;
