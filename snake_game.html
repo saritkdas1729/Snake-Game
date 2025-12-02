@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Game</title>
+    <link rel="stylesheet" href="reset.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+
+            background-color: #83b700;
+            color : #004e00;
+        }
+
+        .top-panel {
+            padding: 10px 20px;
+            border-bottom: 5px solid #004e00;
+
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .bottom-panel {
+            flex: 1 1 auto;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        canvas {
+            border: 10px solid #004e00;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-panel">SCORE : 0</div>
+    <div id="panel" class="bottom-panel">
+        <canvas width="580" height="580" id="canvas" style="background-color: white;"></canvas>
+    </div>    
+    <script src="./snake_game.js"></script>
+</body>
+</html>
