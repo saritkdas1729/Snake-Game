@@ -8,7 +8,7 @@ window.addEventListener('load', () => {
     const fpsE = document.querySelector('#fps');
     const timeElapsedE = document.querySelector('#elapsed-time');
 
-    console.log({fpsE, timeElapsedE});
+    console.log({ fpsE, timeElapsedE });
 
     const canvasS = getComputedStyle(canvasE);
     const panelS = getComputedStyle(panelE);
@@ -48,6 +48,9 @@ window.addEventListener('load', () => {
 
     let lastUpdateTime = null;
 
+    let targetFPS = 30;
+    let elapsedTime = 0;
+
     function draw() {
         //draw background
         ctx.fillStyle = COLOR_LIGHT_GREEN;
@@ -79,32 +82,32 @@ window.addEventListener('load', () => {
 
     function animate() {
         //time related ops
-        const now = Date.now()
-        const deltaTime = now - lastUpdateTime;
-        lastUpdateTime = now;
+        const now = performance.now()
+        elapsedTime = now - lastUpdateTime;
         
-        const fps = (1000 / deltaTime).toFixed(2);
-        
-        console.log({deltaTime, fps});
+        if (elapsedTime >= (1000 / targetFPS) - 5) {
+            lastUpdateTime = now;
+            const fps = (1000 / elapsedTime).toFixed(2);
+            console.log({ elapsedTime, fps });
 
 
-        //update
-        const head = snakeBody[0];
-        const new_head = { 'x': head.x + snakeDir.x, 'y': head.y + snakeDir.y };
-        if (new_head.x >= worldWidth || new_head.x < 0 || new_head.y >= worldHeight || new_head.y < 0) {
-            isGameOver = true;
-        } else {
-            snakeBody.unshift(new_head);
-            snakeBody.pop();
+            //update
+            const head = snakeBody[0];
+            const new_head = { 'x': head.x + snakeDir.x, 'y': head.y + snakeDir.y };
+            if (new_head.x >= worldWidth || new_head.x < 0 || new_head.y >= worldHeight || new_head.y < 0) {
+                isGameOver = true;
+                window.location.href = './game_over.html';
+            } else {
+                snakeBody.unshift(new_head);
+                snakeBody.pop();
+            }
+
+            elapsedTime = 0;
+            draw();
         }
 
-        draw();
 
-        if (isGameOver) {
-            window.location.href = "./game_over.html";
-        } else {
-            requestAnimationFrame(() => animate());
-        }
+        requestAnimationFrame(() => animate());
     }
 
     document.addEventListener('keydown', (e) => {
@@ -120,7 +123,7 @@ window.addEventListener('load', () => {
     });
 
 
-    lastUpdateTime = Date.now();
+    lastUpdateTime = performance.now();
     draw();
     requestAnimationFrame(() => animate());
 
