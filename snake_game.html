@@ -15,7 +15,7 @@
         }
 
         .top-panel {
-            padding: 10px 20px;
+            padding: 10px 10px;
             border-bottom: 5px solid #004e00;
 
             font-size: 1.5rem;
@@ -33,10 +33,19 @@
         canvas {
             border: 10px solid #004e00;
         }
+
+        .info {
+            padding: 0px 10px;
+            border-right: 5px solid #004e00;
+        }
     </style>
 </head>
 <body>
-    <div class="top-panel">SCORE : 0</div>
+    <div class="top-panel">
+        <span class="info" id="score">SCORE : 0</span>
+        <span class="info" id="fps">FPS : 0</span>
+        <span class="info" id="elapsed-time">Elapsed Time : 0</span>
+    </div>
     <div id="panel" class="bottom-panel">
         <canvas width="580" height="580" id="canvas" style="background-color: white;"></canvas>
     </div>    

@@ -5,6 +5,10 @@ function getValueFromPixelString(string) {
 window.addEventListener('load', () => {
     const canvasE = document.querySelector('#canvas');
     const panelE = document.querySelector('#panel');
+    const fpsE = document.querySelector('#fps');
+    const timeElapsedE = document.querySelector('#elapsed-time');
+
+    console.log({fpsE, timeElapsedE});
 
     const canvasS = getComputedStyle(canvasE);
     const panelS = getComputedStyle(panelE);
@@ -15,13 +19,13 @@ window.addEventListener('load', () => {
     const COLOR_DARK_GREEN = '#004e00';
 
     const screenSize = Math.floor((
-            getValueFromPixelString(panelS.height) - 
-            getValueFromPixelString(panelS.borderTopWidth) - 
-            getValueFromPixelString(panelS.borderBottomWidth) - 
-            getValueFromPixelString(panelS.paddingTop) - 
-            getValueFromPixelString(panelS.paddingBottom) - 
-            getValueFromPixelString(canvasS.borderTopWidth) - 
-            getValueFromPixelString(canvasS.borderBottomWidth)
+        getValueFromPixelString(panelS.height) -
+        getValueFromPixelString(panelS.borderTopWidth) -
+        getValueFromPixelString(panelS.borderBottomWidth) -
+        getValueFromPixelString(panelS.paddingTop) -
+        getValueFromPixelString(panelS.paddingBottom) -
+        getValueFromPixelString(canvasS.borderTopWidth) -
+        getValueFromPixelString(canvasS.borderBottomWidth)
         - 2 * GAP) / REZ) * REZ;
 
     const screenWidth = screenSize;
@@ -42,7 +46,7 @@ window.addEventListener('load', () => {
 
     let isGameOver = false;
 
-    let lastUpdateTime = Date.now();
+    let lastUpdateTime = null;
 
     function draw() {
         //draw background
@@ -74,6 +78,16 @@ window.addEventListener('load', () => {
     }
 
     function animate() {
+        //time related ops
+        const now = Date.now()
+        const deltaTime = now - lastUpdateTime;
+        lastUpdateTime = now;
+        
+        const fps = (1000 / deltaTime).toFixed(2);
+        
+        console.log({deltaTime, fps});
+
+
         //update
         const head = snakeBody[0];
         const new_head = { 'x': head.x + snakeDir.x, 'y': head.y + snakeDir.y };
@@ -105,8 +119,10 @@ window.addEventListener('load', () => {
         }
     });
 
-    requestAnimationFrame(() => {
-        draw();
-        requestAnimationFrame(() => animate());
-    });
+
+    lastUpdateTime = Date.now();
+    draw();
+    requestAnimationFrame(() => animate());
+
+
 });
